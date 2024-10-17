@@ -37,4 +37,15 @@ public class FirstPlaywrightTest {
 		}
 	}
 
+    @Test
+    public void displayAllEventNames() {
+        try (Playwright pw = Playwright.create()) { // guarantee the browser and pages will be closed in the end
+            Browser browser = pw.chromium().launch();
+            Page page = browser.newPage();
+            page.navigate("http://localhost:5001/app/catalog.html");
+            page.locator(".event-name").all().forEach(locator -> System.out.println(locator.innerText()));
+        }
+    }
+
+
 }
